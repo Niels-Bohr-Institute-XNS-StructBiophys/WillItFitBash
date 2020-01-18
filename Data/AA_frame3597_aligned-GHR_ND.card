@@ -1,0 +1,7 @@
+1                       // Number of datasets
+
+GHR_NDSAXSbest.chi        // Name of first dataset
+-1.0                  // Contrast of first dataset 
+0.00091                 // Concentration of sample in mM in first dataset
+1.0                     // Scaling of first dataset
+0.0                     // Background of first dataset

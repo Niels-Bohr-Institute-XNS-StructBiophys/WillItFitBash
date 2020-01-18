@@ -1,0 +1,138 @@
+TODOs:
+
+
+
+
+
+improve Import routine, do in ImportAtomsAndResiduesFromPDBFile, assign each Atom its residue name
+-debug and compare results
+-ProteinStructureCopy activate again
+-clean up / return ImportPDBFile
+-center issue Atom vs ResidueID
+-if zeros coo legendre will produce nan's
+q-based progress bar for ComputeModel and q-based and iteration-based ones for LM algorithm
+Add notes:
+-ProteinStructure is passed as Copies down to fit routines and Model (struct Protein ProteinStructure), no struct Protein * ProteinStructure, except for AllocateProteinStructure, CopyProteinStructure and ImportAtomsAndResiduesFromPDBFile -> use &ProteinStructure(Copy) there
+-by contrast UserDefinedStructure is passed as Pointer down to fit routines and Model, do the same with UserDefinedStructureShared
+
+
+-automatic CaPP call to add H and H2O?
+
+-new arguments and assign arguments as in XNDiff and fit2dcorr:
+	+card <file>
+	+pdb <file>
+	+par <file>
+	+dat <file>
+	-res <file fold_steps>, default none
+	-out <subdir name for results>, pdb card par dat own_string -> chose the name of the file + append -results, default card
+	-Q min1 max1 min2 max2 min3 max3 ... (all ranges or only one range for all) -> check that it matches, default 0 1 or all
+	-fit <alg-index num_iter ...>, default LM 50 ..., check input 
+	-log <logfile mode>, default logfile.log +1
+	-cov <1/0>, default 0
+	-con <confidence level>, default ?
+	-rm the stupid z option
+	after that check existence of all relevant files
+
+
+
+
+
+
+
+
+
+
+generally better order input args in Opt algorithm functions 
+
+
+GridsearchLM(2)
+---------------
+
+mv output to logfile:
+
+Parameter  0 =               0          BackN100 
+Parameter  1 =               1          ScaleN100 
+Parameter  2 =               0          BackN0 
+Parameter  3 =               1          ScaleN0 
+Parameter  4 =               0          BackX 
+Parameter  5 =           2e+07          ScaleX 
+Parameter  6 =               1          ScaleConc 
+Parameter  7 =             0.1          HYDR 
+Parameter  8 =             0.1          MOD 
+
+********************************************************************************
+Cycle number     = 1 
+Parameter nr.  5 = 2.11427e+07 
+Chisquare        = 6.15815 
+
+********************************************************************************
+Cycle number     = 1 
+Parameter nr.  7 = 0.0376685 
+Chisquare        = 2.67052 
+
+********************************************************************************
+Cycle number     = 1 
+Parameter nr.  8 = 0.0516037 
+Chisquare        = 2.40156 
+
+********************************************************************************
+Cycle number     = 2 
+Parameter nr.  5 = 2.23073e+07 
+Chisquare        = 1.24528 
+
+Fix output of LM in logfile:
+
+Run fitting routine no. 2 GridsearchLM():
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+	----------------------------------------------------------------
+
+	Algorithm terminated at maximal iteration step it = 2, maybe increase number of iteration steps
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+	----------------------------------------------------------------
+
+	Algorithm terminated at maximal iteration step it = 2, maybe increase number of iteration steps
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+	----------------------------------------------------------------
+
+	Algorithm terminated at maximal iteration step it = 2, maybe increase number of iteration steps
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+	----------------------------------------------------------------
+
+	Algorithm terminated at maximal iteration step it = 2, maybe increase number of iteration steps
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+
+
+
+BFGS(3)
+---------------
+
+
+
+
+
+GridsearchBFGS(4)
+-----------------
+
+
+
+
+
+Swarm(5)
+-----------------
+
+
+
+
+Genetic(5)
+-----------------
+

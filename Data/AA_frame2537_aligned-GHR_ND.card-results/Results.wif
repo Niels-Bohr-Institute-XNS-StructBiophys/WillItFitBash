@@ -1,0 +1,98 @@
+.card-file:
+	/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame2537_aligned-GHR_ND.card 
+
+Datafiles:
+	/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_NDSAXSbest.chi 
+
+Sample info-file:
+	/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat 
+
+Final chisq = 6.70179 
+
+Lower limit on q = 0 
+Upper limit on q = 1 
+
+Parameters:
+
+	     Value             Error             Name
+	 0   1.4               Fixed             AxisRatio
+	 1   65                Fixed             AreaPerHeadgroup
+	 2   25.8              Fixed             HeightOfBelt
+	 3   120               Fixed             NumberOfLipids
+	 4   0                 Fixed             Dummy
+	 5   5                 Fixed             WaterAtHeads
+	 6   0                 Fixed             WaterAtBelt
+	 7   0                 Fixed             Dummy
+	 8   7.30869           8.42197           XRoughness
+	 9   1.01837           0.906775          CVBelt
+	10   0.984808          0.0931668         CVLipids
+	11   1.02173           0.508278          CVMP
+	12   0                 Fixed             BackN100
+	13   1                 Fixed             ScaleN100
+	14   0                 Fixed             BackN0
+	15   1                 Fixed             ScaleN0
+	16   0.00012           Fixed             BackX
+	17   0.937607          3.74257           ScaleX
+	18   5                 Fixed             NRoughness
+	19   1                 Fixed             CVWater
+	20   1                 Fixed             ScaleConc
+	21   0                 Fixed             Dummy
+	22   0                 Fixed             Dummy
+	23   0                 Fixed             Dummy
+	24   0                 Fixed             TranslateX
+	25   0                 Fixed             TranslateA
+	26   0                 Fixed             TranslateZ
+	27   0                 Fixed             RotateZ1
+	28   0                 Fixed             RotateX
+	29   0                 Fixed             RotateZ2
+
+
+Location of inital .pdb-file: /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame2537_aligned.pdb
+
+Atom and residue counts:
+
+	Number of Atoms                    : 13171
+	Number of Atoms (Modification XXX) : 0
+	Number of Residues                 : 13171
+
+	Number of H  : 6479
+	Number of D  : 0
+	Number of C  : 4232
+	Number of N  : 1112
+	Number of O  : 1313
+	Number of P  : 0
+	Number of S  : 35
+
+	Number of Zn : 0
+	Number of Cl : 0
+	Number of Na : 0
+	Number of Ca : 0
+	Number of Fe : 0
+
+	Number of Q  : 0
+
+
+Constraints for spectrum 0: 
+	Scattering length density of headgroups = 1.26688e-13
+	Scattering length density of core       = 8.32134e-14
+	Scattering length density of methyl     = 4.74988e-14
+	Scattering length density of belt       = 1.20233e-13
+	Area per headgroup                      = 65
+
+Global parameteres:
+	Height of bilayer             = 43.6595 
+	Height of hydrophobic bilayer = 28.1019 
+	Height of methyl layer        = 3.26101 
+	Concentration                 = 0 
+	Mol. volume of dry lipid head = 0 
+	Mol. volume of lipid tail     = 0 
+	Mol. volume of methyl         = 0 
+	Mol. volume of belt           = 0 
+
+	Number density       = 5.48002e+14 
+	Major semiaxis       = 42.1943 
+	Minor semiaxis       = 30.1388 
+	Volume of core       = 0 
+	Volume of headgroups = 0 
+	Width of belt        = 8.43585 
+	Volume of methyl     = 0 

@@ -1,0 +1,17 @@
+WIF on computers:
+-----------------
+	System's standard GSL
+		gcc WillItFit.c -O3 -fopenmp -g -Wall -o WillItFit.com -lm -lgsl -lgslcblas
+
+	User-supplied GSL built under $PATHTOGSL/gsl-2.4/build/
+		gcc WillItFit.c -O3 -fopenmp -g -Wall -o WillItFit.com -L$PATHTOGSL/gsl-2.4/build/lib/ -I$PATHTOGSL/gsl-2.4/build/include/ -lm -lgsl -lgslcblas -Wl,-rpath,"$PATHTOGSL/gsl-2.4/build/lib/"
+
+		gcc WillItFit.c -O3 -fopenmp -g -Wall -o WillItFit.com -L/home/msmile/Seafile/MartinS/software/gsl-2.4/build/lib/ -I/home/msmile/Seafile/MartinS/software/gsl-2.4/build/include/ -lm -lgsl -lgslcblas -Wl,-rpath,"/home/msmile/Seafile/MartinS/software/gsl-2.4/build/lib/"
+
+
+WIF on mobile devices:
+----------------------
+	Sailfish OS (also GNU Linux gcc 4.8.x):
+		use I include path is mandatory
+		use C99 standard for declarations in for loops: -std=gnu99 (knows M_PI) or -std=c99 (does not know M_PI)
+		gcc -std=gnu99 WillItFit.c -O3 -fopenmp -g -Wall -o WillItFit.com -L/home/nemo/software/gsl-2.4/build/lib/ -lm -lgsl -lgslcblas -Wl,-rpath,"/home/nemo/software/gsl-2.4/build/lib/" -I/home/nemo/software/gsl-2.4/build/include/
