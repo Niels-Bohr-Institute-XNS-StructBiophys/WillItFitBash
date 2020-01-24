@@ -1,0 +1,1132 @@
+*************************** WillItFit Batchprocessing **************************
+
+Version 0.01 2020-01-14
+
+
+Based on the WillItFit software (M.C. Pedersen, L. Arleth and K. Mortensen, "WillItFit: A framework for fitting of constrained models to small-angle scattering data", J. Appl. Cryst. 46, 1894-1898 (2013) doi:10.1107/S0021889813026022)
+
+Code adaptations implemented by:
+	Nicholas Skar-Gislinge
+	Asger Neesgaard Sand
+	Martin Schmiele
+
+********************************************************************************
+
+
+********************************************************************************
+
+Program called with: /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/C/WillItFit.com -c=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card -s=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat -p=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par -d=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb -n=0.0 -x=1.0 -r=1 -i=15 -j=3 -k=0 -e=N/A -t=0 -o=1 -h=0.0 -z=1 -l=1 
+
+
+Summarizing assigned arguments:
+
+	CMD = 1
+
+	CardFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card
+	SamplesFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat
+	ParameterFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par
+	PDBFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+
+	ResolutionFileLocation = N/A
+	IncludeResolutionEffects = 0
+	NumberOfSmearingFolds = 0
+
+	Q = 0.000000 - 1.000000 [1/A]
+
+	Fit routine number = 1
+	FittingRoutineArgument1 = 15
+	FittingRoutineArgument2 = 3
+	FittingRoutineArgument3 = 0
+
+	PrintCovarianceMatrix = 1
+	ChiSquareFractile = 0.000000
+
+
+********************************************************************************
+
+Read parameters:
+
+	Read parameters from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par
+
+	Found 30 initial fit parameters, thereof 5 are free parameters
+
+	Parameters[i]
+
+		i
+		.Name
+		.MinValue
+		.Value
+		.MaxValue
+		.(int)iParameter
+		.Error
+
+		 0                      AxisRatio 1               1.4             1.6             0 0              
+		 1               AreaPerHeadgroup 60              65              75              0 0              
+		 2                   HeightOfBelt 20              25.8            26              0 0              
+		 3                 NumberOfLipids 10              120             280             0 0              
+		 4                          Dummy 0               0               0               0 0              
+		 5                   WaterAtHeads 0               5               10              0 0              
+		 6                    WaterAtBelt 0               0               10              0 0              
+		 7                          Dummy 0               0               0               0 0              
+		 8                     XRoughness 2               6.21378         10              1 0              
+		 9                         CVBelt 0.9             1.02844         1.1             1 0              
+		10                       CVLipids 0.9             0.981301        1.1             1 0              
+		11                           CVMP 0.9             1.06076         1.1             1 0              
+		12                       BackN100 -1              0               1               0 0              
+		13                      ScaleN100 0.9             1               1.1             0 0              
+		14                         BackN0 -1              0               1               0 0              
+		15                        ScaleN0 0.9             1               1.1             0 0              
+		16                          BackX -1              0.00012         1               0 0              
+		17                         ScaleX 0.9             1.19804         1.2             1 0              
+		18                     NRoughness 2               5               10              0 0              
+		19                        CVWater 0.9             1               1.1             0 0              
+		20                      ScaleConc 0.9             1               1.1             0 0              
+		21                          Dummy 0               0               1               0 0              
+		22                          Dummy 0               0               1               0 0              
+		23                          Dummy 0               0               0               0 0              
+		24                     TranslateX -10             0               10              0 0              
+		25                     TranslateA -10             0               10              0 0              
+		26                     TranslateZ -10             0               10              0 0              
+		27                       RotateZ1 -3.14           0               3.14            0 0              
+		28                        RotateX -3.14           0               3.14            0 0              
+		29                       RotateZ2 -3.14           0               3.14            0 0              
+
+
+********************************************************************************
+
+Read .card-file and import the spectra:
+
+	Read HighestNumberOfDatapoints and NumberOfSpectra via CheckSizeOfData() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card
+
+		Attempt to read 1 spectra
+
+			Read file no. 1 from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_NDSAXSbest.chi
+			Found 95 data points
+
+
+	Importing spectra via ImportSpectra() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card
+
+		Attempt to import 1 spectra
+
+			Import data from file no. 1 from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_NDSAXSbest.chi
+			Processed 95 data points
+
+
+********************************************************************************
+
+Assign fitting ranges in spectra:
+
+	AssignFittingRanges()
+
+		Dataset no. 1 contains 95 points.
+		Fit will be from point 1 to point 95.
+
+
+		The total number of fitted points is 95.
+
+
+********************************************************************************
+
+Resolution effects in Q:
+
+	Excluding resolution effects
+
+
+********************************************************************************
+
+Print Data information:
+
+	NumberOfSpectra = 1
+	HighestNumberOfDatapoints = 95
+
+	Spectra no. 1
+
+		Data[0]
+			.Filename                 = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_NDSAXSbest.chi
+			.NumberOfDatapoints       = 95
+			.NMin                     = 0
+			.NMax                     = 95
+			.IncludeResolutionEffects = 0
+			.Concentration            = 548002000000000.062500
+			.Contrast                 = -1.000000
+
+			j
+			.QValues[j]
+			.IValues[j]
+			.SigmaValues[j]
+			.SigmaQValues[j]
+			  0 0.005383        0.015499        1252050.452773  0.000000       
+			  1 0.005856        0.013626        1911804.201462  0.000000       
+			  2 0.006328        0.012440        2541173.585731  0.000000       
+
+			... (for full output use -l=2 or -l=-2 option) ...
+
+			 92 0.454601        0.000114        5040181945.279058 0.000000       
+			 93 0.473033        0.000158        2750614957.710304 0.000000       
+			 94 0.489338        0.000227        326691388.940950 0.000000       
+
+
+********************************************************************************
+
+Read sample informations:
+
+	Read NumberOfSampleInformations via CheckSizeOfSampleInformation() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat
+	Found 5 sample informations
+
+	Read sample informations via ImportSampleInformation() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat
+		Volumes of molecules will be stored in array VolumesOfMolecules[]
+		Scattering lengths will be assigned to corresponding dataset in Data[].ScatteringLengths (in case of neutron scattering weighted with the provided sample contrast)
+
+		i
+		VolumesOfMolecules[i]
+
+		 0 30.000000      
+		 1 331.000000     
+		 2 818.800000     
+		 3 108.600000     
+		 4 27115.000000   
+
+
+		i
+		j
+		Data[i].ScatteringLengths[j]
+
+		 0  0 2.82e-12       
+		 0  1 4.62e-11       
+		 0  2 6.71e-11       
+		 0  3 5.08e-12       
+		 0  4 3.32e-09       
+
+
+		Modification label is 'XXX'
+
+
+********************************************************************************
+
+Importing PDB-file:
+
+	Read ProteinStructure.NumberOfResidues via CheckNumberOfResiduesInPDBFile() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+
+	Read ProteinStructure.NumberOfAtoms via CheckNumberOfAtomsInPDBFile() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+
+	Found 13171 atoms distributed amongst 13171 residues
+
+	AllocateProteinStructure()
+
+	Import ProteinStructure.Residues via ImportResiduesFromPDBFile() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+
+		Write skipped lines from PDB file to /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/AA_frame3597_aligned_LinesNotRead.pdb
+		Found 0 atoms belonging to modification: XXX
+		Found center at (x,y,z) = (0.566044 , 61.316528 , -12.802562)
+		New center is at (x,y,z) = (-0.000000 , 0.000000 , -0.000000)
+
+	ImportAtomsFromPDBFile()
+
+
+	ProteinStructure
+		.PDBFileLocation           = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+		.NumberOfResidues          = 13171
+		.NumberOfAtoms             = 13171
+		.NumberOfHAtoms            = 6479
+		.NumberOfCAtoms            = 4232
+		.NumberOfNAtoms            = 1112
+		.NumberOfOAtoms            = 1313
+		.NumberOfPAtoms            = 0
+		.NumberOfSAtoms            = 35
+		.NumberOfZNAtoms           = 0
+		.NumberOfCLAtoms           = 0
+		.NumberOfNAAtoms           = 0
+		.NumberOfCAAtoms           = 0
+		.NumberOfFEAtoms           = 0
+		.NumberOfQAtoms            = 0
+		.ModificationName          = XXX
+		.NumberOfModificationAtoms = 0
+		.Weight                    = 0.000000
+		.Residues[i]
+			i
+			.Name
+			.AtomName
+			.ResidueID
+			.Volume
+			.Weight
+			.XRayScatteringLength
+			.NeutronScatteringLength
+			.xVolume
+			.yVolume
+			.zVolume
+			.xXRayScattering
+			.yXRayScattering
+			.zXRayScattering
+			.xNeutronScattering
+			.yNeutronScattering
+			.zNeutronScattering
+
+			    0 MET  N 0 2.490    14.007   1.973E-12 9.36E-13 98.286   -63.358  94.693   98.286   -63.358  94.693   98.286   -63.358  94.693  
+			    1 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.328   -64.433  94.271   97.328   -64.433  94.271   97.328   -64.433  94.271  
+			    2 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.597   -65.886  94.585   97.597   -65.886  94.585   97.597   -65.886  94.585  
+			    3 MET  O 0 9.130    15.999   2.254E-12 5.803E-13 97.698   -66.687  93.663   97.698   -66.687  93.663   97.698   -66.687  93.663  
+			    4 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.071   -64.244  92.738   97.071   -64.244  92.738   97.071   -64.244  92.738  
+			    5 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 95.647   -63.743  92.480   95.647   -63.743  92.480   95.647   -63.743  92.480  
+			    6 MET  S 0 19.860   32.060   4.509E-12 2.847E-13 95.125   -62.371  93.548   95.125   -62.371  93.548   95.125   -62.371  93.548  
+
+			... (for full output use -l=2 or -l=-2 option) ...
+
+			13164 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -26.668  78.393   -22.856  -26.668  78.393   -22.856  -26.668  78.393   -22.856 
+			13165 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -28.858  80.971   -20.527  -28.858  80.971   -20.527  -28.858  80.971   -20.527 
+			13166 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -27.316  81.644   -21.128  -27.316  81.644   -21.128  -27.316  81.644   -21.128 
+			13167 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -28.869  81.961   -22.000  -28.869  81.961   -22.000  -28.869  81.961   -22.000 
+			13168 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -25.359  81.164   -22.527  -25.359  81.164   -22.527  -25.359  81.164   -22.527 
+			13169 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -25.846  80.458   -24.128  -25.846  80.458   -24.128  -25.846  80.458   -24.128 
+			13170 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -24.606  79.635   -23.100  -24.606  79.635   -23.100  -24.606  79.635   -23.100 
+
+
+********************************************************************************
+
+Initialize the user-defined structure:
+
+	InitializeUserDefinedStructure()
+
+
+********************************************************************************
+
+Test computation of constraints for all datasets:
+
+	ComputeConstraints() for Data[0].Constraints
+
+	Table
+		.j
+		.Data[0].Constraints[j]
+
+		 0 1.27E-13
+		 1 8.351E-14
+		 2 4.767E-14
+		 3 1.191E-13
+		 4 9.4E-14
+		 5 0
+		 6 43.12
+		 7 28
+		 8 3.187
+		 9 65
+		10 0
+		11 0
+		12 0
+		13 0
+		14 0
+		15 0
+		16 0
+		17 0
+		18 0
+		19 0
+		20 0
+		21 5.48E+14
+		22 0
+		23 43.5
+		24 31.07
+		25 0
+		26 0
+		27 8.302
+		28 0
+		29 0
+		30 0
+		31 0
+		32 0
+		33 0
+		34 0
+		35 0
+		36 0
+		37 0
+		38 0
+		39 0
+		40 0
+		41 0
+		42 0
+		43 0
+		44 0
+		45 0
+		46 0
+		47 0
+		48 0
+		49 0
+
+
+********************************************************************************
+
+Run fitting routine no. 1 LevenbergMarquardt():
+
+	----------------------------------------------------------------
+
+	Iteration = 0
+
+		Initiating the Levenberg-Marquardt-algorithm
+
+		ChiSquare = 15.0846
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.21378         10              1
+			 9                         CVBelt 0.9             1.02844         1.1             1
+			10                       CVLipids 0.9             0.981301        1.1             1
+			11                           CVMP 0.9             1.06076         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.19804         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 1
+
+		ChiSquare = 6.11048
+		Lambda    = 0.001
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.47026         10              1
+			 9                         CVBelt 0.9             1.0827          1.1             1
+			10                       CVLipids 0.9             0.967416        1.1             1
+			11                           CVMP 0.9             1.04476         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.08943         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 2
+
+		ChiSquare = 6.11048
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.47026         10              1
+			 9                         CVBelt 0.9             1.0827          1.1             1
+			10                       CVLipids 0.9             0.967416        1.1             1
+			11                           CVMP 0.9             1.04476         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.08943         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 3
+
+		ChiSquare = 6.11048
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.47026         10              1
+			 9                         CVBelt 0.9             1.0827          1.1             1
+			10                       CVLipids 0.9             0.967416        1.1             1
+			11                           CVMP 0.9             1.04476         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.08943         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 4
+
+		ChiSquare = 5.85917
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.55009         10              1
+			 9                         CVBelt 0.9             1.08838         1.1             1
+			10                       CVLipids 0.9             0.966248        1.1             1
+			11                           CVMP 0.9             1.04351         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.081           1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 5
+
+		ChiSquare = 5.85917
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.55009         10              1
+			 9                         CVBelt 0.9             1.08838         1.1             1
+			10                       CVLipids 0.9             0.966248        1.1             1
+			11                           CVMP 0.9             1.04351         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.081           1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 6
+
+		ChiSquare = 5.75091
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.54817         10              1
+			 9                         CVBelt 0.9             1.09268         1.1             1
+			10                       CVLipids 0.9             0.96529         1.1             1
+			11                           CVMP 0.9             1.042           1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.07568         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 7
+
+		ChiSquare = 5.75091
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.54817         10              1
+			 9                         CVBelt 0.9             1.09268         1.1             1
+			10                       CVLipids 0.9             0.96529         1.1             1
+			11                           CVMP 0.9             1.042           1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.07568         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 8
+
+		ChiSquare = 5.64514
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.52743         10              1
+			 9                         CVBelt 0.9             1.09686         1.1             1
+			10                       CVLipids 0.9             0.964021        1.1             1
+			11                           CVMP 0.9             1.04072         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.07044         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 9
+
+		ChiSquare = 5.64514
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.52743         10              1
+			 9                         CVBelt 0.9             1.09686         1.1             1
+			10                       CVLipids 0.9             0.964021        1.1             1
+			11                           CVMP 0.9             1.04072         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.07044         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 10
+
+		ChiSquare = 5.5607
+		Lambda    = 0.01
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.50053         10              1
+			 9                         CVBelt 0.9             1.1             1.1             1
+			10                       CVLipids 0.9             0.962777        1.1             1
+			11                           CVMP 0.9             1.03961         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.06548         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 11
+
+		ChiSquare = 5.5607
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.50053         10              1
+			 9                         CVBelt 0.9             1.1             1.1             1
+			10                       CVLipids 0.9             0.962777        1.1             1
+			11                           CVMP 0.9             1.03961         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.06548         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 12
+
+		ChiSquare = 5.5607
+		Lambda    = 1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.50053         10              1
+			 9                         CVBelt 0.9             1.1             1.1             1
+			10                       CVLipids 0.9             0.962777        1.1             1
+			11                           CVMP 0.9             1.03961         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.06548         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 13
+
+		ChiSquare = 5.55762
+		Lambda    = 0.1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.49673         10              1
+			 9                         CVBelt 0.9             1.1             1.1             1
+			10                       CVLipids 0.9             0.962688        1.1             1
+			11                           CVMP 0.9             1.03955         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.06449         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Iteration = 14
+
+		ChiSquare = 5.55762
+		Lambda    = 1
+
+		Parameters[i]
+
+			i
+			.Name
+			.MinValue
+			.Value
+			.MaxValue
+			.(int)iParameter
+
+			 0                      AxisRatio 1               1.4             1.6             0
+			 1               AreaPerHeadgroup 60              65              75              0
+			 2                   HeightOfBelt 20              25.8            26              0
+			 3                 NumberOfLipids 10              120             280             0
+			 4                          Dummy 0               0               0               0
+			 5                   WaterAtHeads 0               5               10              0
+			 6                    WaterAtBelt 0               0               10              0
+			 7                          Dummy 0               0               0               0
+			 8                     XRoughness 2               6.49673         10              1
+			 9                         CVBelt 0.9             1.1             1.1             1
+			10                       CVLipids 0.9             0.962688        1.1             1
+			11                           CVMP 0.9             1.03955         1.1             1
+			12                       BackN100 -1              0               1               0
+			13                      ScaleN100 0.9             1               1.1             0
+			14                         BackN0 -1              0               1               0
+			15                        ScaleN0 0.9             1               1.1             0
+			16                          BackX -1              0.00012         1               0
+			17                         ScaleX 0.9             1.06449         1.2             1
+			18                     NRoughness 2               5               10              0
+			19                        CVWater 0.9             1               1.1             0
+			20                      ScaleConc 0.9             1               1.1             0
+			21                          Dummy 0               0               1               0
+			22                          Dummy 0               0               1               0
+			23                          Dummy 0               0               0               0
+			24                     TranslateX -10             0               10              0
+			25                     TranslateA -10             0               10              0
+			26                     TranslateZ -10             0               10              0
+			27                       RotateZ1 -3.14           0               3.14            0
+			28                        RotateX -3.14           0               3.14            0
+			29                       RotateZ2 -3.14           0               3.14            0
+
+	----------------------------------------------------------------
+
+	Algorithm terminated at maximal iteration step it = 15, maybe increase number of iteration steps
+
+	Estimating errors on refined parameters with CovarianceMatrix
+
+	Writing covariance matrix to file at /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/CovarianceMatrix.dat
+
+	Concluding algorithm
+
+	Fit complete !
+
+
+********************************************************************************
+
+Output data and parameters:
+
+	Summarize fit results and parameters in /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/Results.wif via OutputData()
+
+	Write experimental and fitted spectra via OutputSpectra()
+
+		Write spectra no. 1 to file /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/dat1.dat
+		Write fitted spectra no. 1 to file /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/fit1.dat
+
+	Write fitted parameters in parameter file and to logfile via OutputParameters()
+
+		Write fitted parameters to parameter file at /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/ParametersAfter.mcp
+
+		Summarize fitted parameters
+
+			Final Chisquare = 5.55762
+			Parameters:
+			     Value             Error             Name
+			 0   1.4               Fixed             AxisRatio
+			 1   65                Fixed             AreaPerHeadgroup
+			 2   25.8              Fixed             HeightOfBelt
+			 3   120               Fixed             NumberOfLipids
+			 4   0                 Fixed             Dummy
+			 5   5                 Fixed             WaterAtHeads
+			 6   0                 Fixed             WaterAtBelt
+			 7   0                 Fixed             Dummy
+			 8   6.49673           6.26029           XRoughness
+			 9   1.1               0.502281          CVBelt
+			10   0.962688          0.0461818         CVLipids
+			11   1.03955           0.28046           CVMP
+			12   0                 Fixed             BackN100
+			13   1                 Fixed             ScaleN100
+			14   0                 Fixed             BackN0
+			15   1                 Fixed             ScaleN0
+			16   0.00012           Fixed             BackX
+			17   1.06449           2.53483           ScaleX
+			18   5                 Fixed             NRoughness
+			19   1                 Fixed             CVWater
+			20   1                 Fixed             ScaleConc
+			21   0                 Fixed             Dummy
+			22   0                 Fixed             Dummy
+			23   0                 Fixed             Dummy
+			24   0                 Fixed             TranslateX
+			25   0                 Fixed             TranslateA
+			26   0                 Fixed             TranslateZ
+			27   0                 Fixed             RotateZ1
+			28   0                 Fixed             RotateX
+			29   0                 Fixed             RotateZ2
+
+
+********************************************************************************
+
+Free variables
+
+

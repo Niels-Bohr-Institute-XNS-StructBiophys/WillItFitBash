@@ -1,6 +1,6 @@
 *************************** WillItFit Batchprocessing **************************
 
-Version 0.01 2020-01-14
+Version 0.02 2020-01-24
 
 
 Based on the WillItFit software (M.C. Pedersen, L. Arleth and K. Mortensen, "WillItFit: A framework for fitting of constrained models to small-angle scattering data", J. Appl. Cryst. 46, 1894-1898 (2013) doi:10.1107/S0021889813026022)
@@ -10,12 +10,14 @@ Code adaptations implemented by:
 	Asger Neesgaard Sand
 	Martin Schmiele
 
+Designed as being good enough for government work.
+
 ********************************************************************************
 
 
 ********************************************************************************
 
-Program called with: /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/C/WillItFit.com -c=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card -s=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat -p=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par -d=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb -n=0.0 -x=1.0 -r=1 -i=15 -j=3 -k=0 -e=N/A -t=0 -o=1 -h=0.0 -z=1 -l=1 
+Program called with: /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/C/WillItFit.com -c=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card -s=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat -p=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par -d=/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb -a=0 -n=0.0 -x=1.0 -r=1 -i=15 -j=3 -k=0 -e=N/A -t=0 -o=1 -h=0.0 -z=1 -l=1 
 
 
 Summarizing assigned arguments:
@@ -26,6 +28,7 @@ Summarizing assigned arguments:
 	SamplesFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat
 	ParameterFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/best_fitAB.par
 	PDBFileLocation = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
+	ReadAtomsAsResidues = 0
 
 	ResolutionFileLocation = N/A
 	IncludeResolutionEffects = 0
@@ -205,11 +208,13 @@ Read sample informations:
 
 Importing PDB-file:
 
+	Read residues and average over all its atoms (for residue-based models).
+
 	Read ProteinStructure.NumberOfResidues via CheckNumberOfResiduesInPDBFile() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
 
 	Read ProteinStructure.NumberOfAtoms via CheckNumberOfAtomsInPDBFile() from /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
 
-	Found 13171 atoms distributed amongst 13171 residues
+	Found 13171 atoms distributed amongst 846 residues
 
 	AllocateProteinStructure()
 
@@ -217,15 +222,15 @@ Importing PDB-file:
 
 		Write skipped lines from PDB file to /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned-GHR_ND.card-results/AA_frame3597_aligned_LinesNotRead.pdb
 		Found 0 atoms belonging to modification: XXX
-		Found center at (x,y,z) = (0.566044 , 61.316528 , -12.802562)
-		New center is at (x,y,z) = (-0.000000 , 0.000000 , -0.000000)
+		Found center at (x,y,z) = (1.085667 , 62.223460 , -13.683911)
+		New center is at (x,y,z) = (-0.000000 , -0.000000 , 0.000000)
 
 	ImportAtomsFromPDBFile()
 
 
 	ProteinStructure
 		.PDBFileLocation           = /home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/AA_frame3597_aligned.pdb
-		.NumberOfResidues          = 13171
+		.NumberOfResidues          = 846
 		.NumberOfAtoms             = 13171
 		.NumberOfHAtoms            = 6479
 		.NumberOfCAtoms            = 4232
@@ -261,23 +266,23 @@ Importing PDB-file:
 			.yNeutronScattering
 			.zNeutronScattering
 
-			    0 MET  N 0 2.490    14.007   1.973E-12 9.36E-13 98.286   -63.358  94.693   98.286   -63.358  94.693   98.286   -63.358  94.693  
-			    1 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.328   -64.433  94.271   97.328   -64.433  94.271   97.328   -64.433  94.271  
-			    2 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.597   -65.886  94.585   97.597   -65.886  94.585   97.597   -65.886  94.585  
-			    3 MET  O 0 9.130    15.999   2.254E-12 5.803E-13 97.698   -66.687  93.663   97.698   -66.687  93.663   97.698   -66.687  93.663  
-			    4 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 97.071   -64.244  92.738   97.071   -64.244  92.738   97.071   -64.244  92.738  
-			    5 MET  C 0 16.440   12.011   1.691E-12 6.648E-13 95.647   -63.743  92.480   95.647   -63.743  92.480   95.647   -63.743  92.480  
-			    6 MET  S 0 19.860   32.060   4.509E-12 2.847E-13 95.125   -62.371  93.548   95.125   -62.371  93.548   95.125   -62.371  93.548  
+			    0 MET -- 0 170.330  133.209  2.029E-11 1.009E-12 95.618   -64.819  94.367   95.791   -64.811  94.500   98.853   -67.938  95.941  
+			    1 PHE -- 0 205.930  147.177  2.198E-11 4.132E-12 99.812   -68.966  97.669   99.431   -68.880  97.719   98.961   -68.797  97.957  
+			    2 SER -- 0 95.820   87.078   1.296E-11 2.22E-12 93.576   -69.974  98.712   93.672   -69.925  98.407   94.299   -70.454  97.684  
+			    3 GLY -- 0 59.950   57.052   8.454E-12 1.723E-12 93.422   -73.872  98.226   93.264   -73.688  98.239   92.560   -73.517  98.395  
+			    4 SER -- 0 95.820   87.078   1.296E-11 2.22E-12 90.985   -75.195  101.065  90.923   -75.117  100.940  90.689   -74.377  100.669 
+			    5 GLU -- 0 142.980  128.107  1.888E-11 3.756E-12 89.035   -71.363  103.143  89.066   -71.362  103.206  89.035   -71.278  103.154 
+			    6 ALA -- 0 86.690   71.079   1.071E-11 1.64E-12 87.503   -70.890  98.574   87.510   -70.671  98.893   87.628   -69.299  99.770  
 
 			... (for full output use -l=2 or -l=-2 option) ...
 
-			13164 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -26.668  78.393   -22.856  -26.668  78.393   -22.856  -26.668  78.393   -22.856 
-			13165 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -28.858  80.971   -20.527  -28.858  80.971   -20.527  -28.858  80.971   -20.527 
-			13166 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -27.316  81.644   -21.128  -27.316  81.644   -21.128  -27.316  81.644   -21.128 
-			13167 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -28.869  81.961   -22.000  -28.869  81.961   -22.000  -28.869  81.961   -22.000 
-			13168 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -25.359  81.164   -22.527  -25.359  81.164   -22.527  -25.359  81.164   -22.527 
-			13169 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -25.846  80.458   -24.128  -25.846  80.458   -24.128  -25.846  80.458   -24.128 
-			13170 ILE  H 0 5.150    1.008    2.818E-13 -3.742E-13 -24.606  79.635   -23.100  -24.606  79.635   -23.100  -24.606  79.635   -23.100 
+			  839 PHE -- 0 205.930  147.177  2.198E-11 4.132E-12 -29.028  84.300   -37.129  -29.446  84.297   -36.888  -29.867  84.241   -36.605 
+			  840 VAL -- 0 140.170  99.133   1.522E-11 1.473E-12 -32.162  80.915   -33.762  -31.755  81.082   -33.628  -29.533  82.109   -32.054 
+			  841 THR -- 0 122.560  101.105  1.522E-11 2.137E-12 -29.913  81.574   -29.244  -30.357  81.555   -29.377  -31.937  80.683   -29.870 
+			  842 ALA -- 0 86.690   71.079   1.071E-11 1.64E-12 -31.727  77.738   -27.605  -31.505  78.021   -27.511  -31.116  79.311   -26.770 
+			  843 ALA -- 0 86.690   71.079   1.071E-11 1.64E-12 -31.495  81.178   -24.858  -31.561  80.908   -24.692  -31.699  79.702   -23.687 
+			  844 GLY -- 0 59.950   57.052   8.454E-12 1.723E-12 -32.490  78.883   -21.702  -32.318  79.086   -21.710  -31.701  79.401   -21.330 
+			  845 ILE -- 0 176.040  129.159  1.973E-11 1.969E-12 -28.244  78.699   -20.925  -28.627  78.403   -20.602  -30.605  76.909   -18.822 
 
 
 ********************************************************************************
@@ -303,9 +308,9 @@ Test computation of constraints for all datasets:
 		 3 1.191E-13
 		 4 9.4E-14
 		 5 0
-		 6 43.12
+		 6 42.94
 		 7 28
-		 8 3.187
+		 8 3.16
 		 9 65
 		10 0
 		11 0
@@ -320,11 +325,11 @@ Test computation of constraints for all datasets:
 		20 0
 		21 5.48E+14
 		22 0
-		23 43.5
-		24 31.07
+		23 43.69
+		24 31.21
 		25 0
 		26 0
-		27 8.302
+		27 8.273
 		28 0
 		29 0
 		30 0
@@ -359,7 +364,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 		Initiating the Levenberg-Marquardt-algorithm
 
-		ChiSquare = 15.0846
+		ChiSquare = 15.4882
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -406,7 +411,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 1
 
-		ChiSquare = 6.11048
+		ChiSquare = 5.77343
 		Lambda    = 0.001
 
 		Parameters[i]
@@ -426,16 +431,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.47026         10              1
-			 9                         CVBelt 0.9             1.0827          1.1             1
-			10                       CVLipids 0.9             0.967416        1.1             1
-			11                           CVMP 0.9             1.04476         1.1             1
+			 8                     XRoughness 2               6.63557         10              1
+			 9                         CVBelt 0.9             1.08145         1.1             1
+			10                       CVLipids 0.9             0.96977         1.1             1
+			11                           CVMP 0.9             1.04522         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.08943         1.2             1
+			17                         ScaleX 0.9             1.09699         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -453,7 +458,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 2
 
-		ChiSquare = 6.11048
+		ChiSquare = 5.77343
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -473,16 +478,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.47026         10              1
-			 9                         CVBelt 0.9             1.0827          1.1             1
-			10                       CVLipids 0.9             0.967416        1.1             1
-			11                           CVMP 0.9             1.04476         1.1             1
+			 8                     XRoughness 2               6.63557         10              1
+			 9                         CVBelt 0.9             1.08145         1.1             1
+			10                       CVLipids 0.9             0.96977         1.1             1
+			11                           CVMP 0.9             1.04522         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.08943         1.2             1
+			17                         ScaleX 0.9             1.09699         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -500,7 +505,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 3
 
-		ChiSquare = 6.11048
+		ChiSquare = 5.77343
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -520,16 +525,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.47026         10              1
-			 9                         CVBelt 0.9             1.0827          1.1             1
-			10                       CVLipids 0.9             0.967416        1.1             1
-			11                           CVMP 0.9             1.04476         1.1             1
+			 8                     XRoughness 2               6.63557         10              1
+			 9                         CVBelt 0.9             1.08145         1.1             1
+			10                       CVLipids 0.9             0.96977         1.1             1
+			11                           CVMP 0.9             1.04522         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.08943         1.2             1
+			17                         ScaleX 0.9             1.09699         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -547,7 +552,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 4
 
-		ChiSquare = 5.85917
+		ChiSquare = 5.63467
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -567,16 +572,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.55009         10              1
-			 9                         CVBelt 0.9             1.08838         1.1             1
-			10                       CVLipids 0.9             0.966248        1.1             1
-			11                           CVMP 0.9             1.04351         1.1             1
+			 8                     XRoughness 2               6.73027         10              1
+			 9                         CVBelt 0.9             1.08651         1.1             1
+			10                       CVLipids 0.9             0.968669        1.1             1
+			11                           CVMP 0.9             1.04343         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.081           1.2             1
+			17                         ScaleX 0.9             1.0915          1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -594,7 +599,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 5
 
-		ChiSquare = 5.85917
+		ChiSquare = 5.63467
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -614,16 +619,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.55009         10              1
-			 9                         CVBelt 0.9             1.08838         1.1             1
-			10                       CVLipids 0.9             0.966248        1.1             1
-			11                           CVMP 0.9             1.04351         1.1             1
+			 8                     XRoughness 2               6.73027         10              1
+			 9                         CVBelt 0.9             1.08651         1.1             1
+			10                       CVLipids 0.9             0.968669        1.1             1
+			11                           CVMP 0.9             1.04343         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.081           1.2             1
+			17                         ScaleX 0.9             1.0915          1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -641,7 +646,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 6
 
-		ChiSquare = 5.75091
+		ChiSquare = 5.5717
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -661,16 +666,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.54817         10              1
-			 9                         CVBelt 0.9             1.09268         1.1             1
-			10                       CVLipids 0.9             0.96529         1.1             1
-			11                           CVMP 0.9             1.042           1.1             1
+			 8                     XRoughness 2               6.69197         10              1
+			 9                         CVBelt 0.9             1.09154         1.1             1
+			10                       CVLipids 0.9             0.966355        1.1             1
+			11                           CVMP 0.9             1.04177         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.07568         1.2             1
+			17                         ScaleX 0.9             1.08617         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -688,7 +693,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 7
 
-		ChiSquare = 5.75091
+		ChiSquare = 5.5717
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -708,16 +713,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.54817         10              1
-			 9                         CVBelt 0.9             1.09268         1.1             1
-			10                       CVLipids 0.9             0.96529         1.1             1
-			11                           CVMP 0.9             1.042           1.1             1
+			 8                     XRoughness 2               6.69197         10              1
+			 9                         CVBelt 0.9             1.09154         1.1             1
+			10                       CVLipids 0.9             0.966355        1.1             1
+			11                           CVMP 0.9             1.04177         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.07568         1.2             1
+			17                         ScaleX 0.9             1.08617         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -735,7 +740,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 8
 
-		ChiSquare = 5.64514
+		ChiSquare = 5.40034
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -755,16 +760,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.52743         10              1
-			 9                         CVBelt 0.9             1.09686         1.1             1
-			10                       CVLipids 0.9             0.964021        1.1             1
-			11                           CVMP 0.9             1.04072         1.1             1
+			 8                     XRoughness 2               6.68608         10              1
+			 9                         CVBelt 0.9             1.0957          1.1             1
+			10                       CVLipids 0.9             0.965818        1.1             1
+			11                           CVMP 0.9             1.04099         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.07044         1.2             1
+			17                         ScaleX 0.9             1.07995         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -782,7 +787,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 9
 
-		ChiSquare = 5.64514
+		ChiSquare = 5.40034
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -802,16 +807,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.52743         10              1
-			 9                         CVBelt 0.9             1.09686         1.1             1
-			10                       CVLipids 0.9             0.964021        1.1             1
-			11                           CVMP 0.9             1.04072         1.1             1
+			 8                     XRoughness 2               6.68608         10              1
+			 9                         CVBelt 0.9             1.0957          1.1             1
+			10                       CVLipids 0.9             0.965818        1.1             1
+			11                           CVMP 0.9             1.04099         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.07044         1.2             1
+			17                         ScaleX 0.9             1.07995         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -829,7 +834,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 10
 
-		ChiSquare = 5.5607
+		ChiSquare = 5.32701
 		Lambda    = 0.01
 
 		Parameters[i]
@@ -849,16 +854,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.50053         10              1
-			 9                         CVBelt 0.9             1.1             1.1             1
-			10                       CVLipids 0.9             0.962777        1.1             1
-			11                           CVMP 0.9             1.03961         1.1             1
+			 8                     XRoughness 2               6.66765         10              1
+			 9                         CVBelt 0.9             1.09919         1.1             1
+			10                       CVLipids 0.9             0.964772        1.1             1
+			11                           CVMP 0.9             1.03988         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.06548         1.2             1
+			17                         ScaleX 0.9             1.07583         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -876,7 +881,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 11
 
-		ChiSquare = 5.5607
+		ChiSquare = 5.32701
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -896,16 +901,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.50053         10              1
-			 9                         CVBelt 0.9             1.1             1.1             1
-			10                       CVLipids 0.9             0.962777        1.1             1
-			11                           CVMP 0.9             1.03961         1.1             1
+			 8                     XRoughness 2               6.66765         10              1
+			 9                         CVBelt 0.9             1.09919         1.1             1
+			10                       CVLipids 0.9             0.964772        1.1             1
+			11                           CVMP 0.9             1.03988         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.06548         1.2             1
+			17                         ScaleX 0.9             1.07583         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -923,7 +928,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 12
 
-		ChiSquare = 5.5607
+		ChiSquare = 5.32701
 		Lambda    = 1
 
 		Parameters[i]
@@ -943,16 +948,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.50053         10              1
-			 9                         CVBelt 0.9             1.1             1.1             1
-			10                       CVLipids 0.9             0.962777        1.1             1
-			11                           CVMP 0.9             1.03961         1.1             1
+			 8                     XRoughness 2               6.66765         10              1
+			 9                         CVBelt 0.9             1.09919         1.1             1
+			10                       CVLipids 0.9             0.964772        1.1             1
+			11                           CVMP 0.9             1.03988         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.06548         1.2             1
+			17                         ScaleX 0.9             1.07583         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -970,7 +975,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 13
 
-		ChiSquare = 5.55762
+		ChiSquare = 5.32025
 		Lambda    = 0.1
 
 		Parameters[i]
@@ -990,16 +995,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.49673         10              1
-			 9                         CVBelt 0.9             1.1             1.1             1
-			10                       CVLipids 0.9             0.962688        1.1             1
-			11                           CVMP 0.9             1.03955         1.1             1
+			 8                     XRoughness 2               6.66397         10              1
+			 9                         CVBelt 0.9             1.09954         1.1             1
+			10                       CVLipids 0.9             0.964671        1.1             1
+			11                           CVMP 0.9             1.03978         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.06449         1.2             1
+			17                         ScaleX 0.9             1.07541         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -1017,7 +1022,7 @@ Run fitting routine no. 1 LevenbergMarquardt():
 
 	Iteration = 14
 
-		ChiSquare = 5.55762
+		ChiSquare = 5.32025
 		Lambda    = 1
 
 		Parameters[i]
@@ -1037,16 +1042,16 @@ Run fitting routine no. 1 LevenbergMarquardt():
 			 5                   WaterAtHeads 0               5               10              0
 			 6                    WaterAtBelt 0               0               10              0
 			 7                          Dummy 0               0               0               0
-			 8                     XRoughness 2               6.49673         10              1
-			 9                         CVBelt 0.9             1.1             1.1             1
-			10                       CVLipids 0.9             0.962688        1.1             1
-			11                           CVMP 0.9             1.03955         1.1             1
+			 8                     XRoughness 2               6.66397         10              1
+			 9                         CVBelt 0.9             1.09954         1.1             1
+			10                       CVLipids 0.9             0.964671        1.1             1
+			11                           CVMP 0.9             1.03978         1.1             1
 			12                       BackN100 -1              0               1               0
 			13                      ScaleN100 0.9             1               1.1             0
 			14                         BackN0 -1              0               1               0
 			15                        ScaleN0 0.9             1               1.1             0
 			16                          BackX -1              0.00012         1               0
-			17                         ScaleX 0.9             1.06449         1.2             1
+			17                         ScaleX 0.9             1.07541         1.2             1
 			18                     NRoughness 2               5               10              0
 			19                        CVWater 0.9             1               1.1             0
 			20                      ScaleConc 0.9             1               1.1             0
@@ -1090,7 +1095,7 @@ Output data and parameters:
 
 		Summarize fitted parameters
 
-			Final Chisquare = 5.55762
+			Final Chisquare = 5.32025
 			Parameters:
 			     Value             Error             Name
 			 0   1.4               Fixed             AxisRatio
@@ -1101,16 +1106,16 @@ Output data and parameters:
 			 5   5                 Fixed             WaterAtHeads
 			 6   0                 Fixed             WaterAtBelt
 			 7   0                 Fixed             Dummy
-			 8   6.49673           6.26029           XRoughness
-			 9   1.1               0.502281          CVBelt
-			10   0.962688          0.0461818         CVLipids
-			11   1.03955           0.28046           CVMP
+			 8   6.66397           6.34196           XRoughness
+			 9   1.09954           0.583323          CVBelt
+			10   0.964671          0.0580416         CVLipids
+			11   1.03978           0.294098          CVMP
 			12   0                 Fixed             BackN100
 			13   1                 Fixed             ScaleN100
 			14   0                 Fixed             BackN0
 			15   1                 Fixed             ScaleN0
 			16   0.00012           Fixed             BackX
-			17   1.06449           2.53483           ScaleX
+			17   1.07541           2.75956           ScaleX
 			18   5                 Fixed             NRoughness
 			19   1                 Fixed             CVWater
 			20   1                 Fixed             ScaleConc

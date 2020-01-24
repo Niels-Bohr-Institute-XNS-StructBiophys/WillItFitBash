@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
 	char PDBFileLocation[256] ;
 	struct Protein ProteinStructure;
 	struct UserDefined UserDefinedStructure;
+	bool ReadAtomsAsResidues = false ;
 
 	// Variables describing the parameters
 	struct Parameter * Parameters;
@@ -164,7 +165,7 @@ int main(int argc, char *argv[])
 	int UPPER_MIN_INDEX = 0 ;
 
 	/// Obtain arguments from program or request them in console
-	ErrorCheck( AssignArguments(argc, argv, CardFileLocation, SamplesFileLocation, ParameterFileLocation, PDBFileLocation, &QMin, &QMax, &ChooseFittingRoutine, &FittingRoutineArgument1, &FittingRoutineArgument2, &FittingRoutineArgument3, &IncludeResolutionEffects, &NumberOfSmearingFolds, ResolutionFileLocation, &PrintCovarianceMatrix, &ChiSquareFractile, &CMD, &WriteLog), "when assigning the arguments from the command line in AssignArguments()", NULL, -1, stdout) ;
+	ErrorCheck( AssignArguments(argc, argv, CardFileLocation, SamplesFileLocation, ParameterFileLocation, PDBFileLocation, &ReadAtomsAsResidues, &QMin, &QMax, &ChooseFittingRoutine, &FittingRoutineArgument1, &FittingRoutineArgument2, &FittingRoutineArgument3, &IncludeResolutionEffects, &NumberOfSmearingFolds, ResolutionFileLocation, &PrintCovarianceMatrix, &ChiSquareFractile, &CMD, &WriteLog), "when assigning the arguments from the command line in AssignArguments()", NULL, -1, stdout) ;
 
 
 	// Define & create directory for output
@@ -228,7 +229,7 @@ int main(int argc, char *argv[])
 	if ( abs(WriteLog) > 0 )
 	{
 		fprintf( logfile, "*************************** WillItFit Batchprocessing **************************\n\n") ;
-		fprintf( logfile, "Version 0.01 2020-01-14\n") ;
+		fprintf( logfile, "Version 0.02 2020-01-24\n") ;
 		fprintf( logfile, "\n\n") ;
 		fprintf( logfile, "Based on the WillItFit software (M.C. Pedersen, L. Arleth and K. Mortensen, \"WillItFit: A framework for fitting of constrained models to small-angle scattering data\", J. Appl. Cryst. 46, 1894-1898 (2013) doi:10.1107/S0021889813026022)\n") ;
 		fprintf( logfile, "\n") ;
@@ -236,6 +237,8 @@ int main(int argc, char *argv[])
 		fprintf( logfile, "\tNicholas Skar-Gislinge\n") ;
 		fprintf( logfile, "\tAsger Neesgaard Sand\n") ;
 		fprintf( logfile, "\tMartin Schmiele\n") ;
+		fprintf( logfile, "\n") ;
+		fprintf( logfile, "Designed as being good enough for government work.\n") ;
 		fprintf( logfile, "\n") ;
 		ClearScreen( logfile ) ;
 		fprintf( logfile, "\n\n") ;
@@ -259,6 +262,7 @@ int main(int argc, char *argv[])
 		fprintf( logfile, "\tSamplesFileLocation = %s\n", SamplesFileLocation) ;
 		fprintf( logfile, "\tParameterFileLocation = %s\n", ParameterFileLocation) ;
 		fprintf( logfile, "\tPDBFileLocation = %s\n", PDBFileLocation) ;
+		fprintf( logfile, "\tReadAtomsAsResidues = %d\n", (int)ReadAtomsAsResidues) ;
 		fprintf( logfile, "\n") ;
 		fprintf( logfile, "\tResolutionFileLocation = %s\n", ResolutionFileLocation) ;
 		fprintf( logfile, "\tIncludeResolutionEffects = %d\n", (int)IncludeResolutionEffects) ;
@@ -598,6 +602,9 @@ int main(int argc, char *argv[])
 			fprintf( logfile, "\n") ;
 			fprintf( logfile, "Importing PDB-file:\n") ;
 			fprintf( logfile, "\n") ;
+			if ( ReadAtomsAsResidues ) { fprintf( logfile, "\tRead each atom as a single residue (i.e. no averaging over atoms for a residue, all-atom based calculation with residue-based models).\n") ; }
+			else { fprintf( logfile, "\tRead residues and average over all its atoms (for residue-based models).\n") ; }
+			fprintf( logfile, "\n") ;
 
 			fflush( logfile ) ;
 		}
@@ -611,7 +618,7 @@ int main(int argc, char *argv[])
 
 			fflush( logfile ) ;
 		}
-		ProteinStructure.NumberOfResidues = CheckNumberOfResiduesInPDBFile( PDBFileLocation ) ;
+		ProteinStructure.NumberOfResidues = CheckNumberOfResiduesInPDBFile( PDBFileLocation, ReadAtomsAsResidues ) ;
 		ErrorCheck(ProteinStructure.NumberOfResidues, "when reading the PDB-file in CheckNumberOfResiduesInPDBFile()", ResultsDirectory, WriteLog, logfile) ;
 
 		if ( abs(WriteLog) > 0 )
@@ -650,7 +657,7 @@ int main(int argc, char *argv[])
 
 			fflush( logfile ) ;
 		}
-		ImportResiduesFromPDBFile( PDBFileLocation, &ProteinStructure, ResultsDirectory, WriteLog, logfile) ;
+		ImportResiduesFromPDBFile( PDBFileLocation, &ProteinStructure, ReadAtomsAsResidues, ResultsDirectory, WriteLog, logfile) ;
 
 		// really necessary to import Atoms, too, since it has been done in residues ???
 		if ( abs(WriteLog) > 0 )

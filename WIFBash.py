@@ -62,7 +62,7 @@ PrintCovarianceMatrix = 1 # boolean flag 0 or 1
 ChiSquareFractile = 0.0
 
 CMD = 1 # do not change
-
+ReadAtomsAsResidues = 0 # =0 for residue-based reading of PDB and calculations, !=0 for all-atom-based (each atom is treated as a single residue)
 
 # logging / reporting
 #
@@ -144,6 +144,7 @@ for PDBFile in sorted(fnmatch.filter(os.listdir( DataDirectory ), '*.pdb')):
 	ProcessToCall.append('-s=%s' % SampleFile)
 	ProcessToCall.append('-p=%s' % ParameterFile)
 	ProcessToCall.append('-d=%s' % PDBFile)
+	ProcessToCall.append('-a=%d' % ReadAtomsAsResidues)
 
 	ProcessToCall.append('-n=%s' % MinQStr)
 	ProcessToCall.append('-x=%s' % MaxQStr)

@@ -95,7 +95,7 @@ void AssignFittingRanges(struct Dataset * Data, double QMin, double QMax, int Nu
 }
 
 
-int AssignArguments(int NumberOfArguments, char *Arguments[], char CardFileLocation[256], char SamplesFileLocation[256], char ParameterFileLocation[256], char PDBFileLocation[256], double *QMin, double *QMax, int *ChooseFittingRoutine, int *FittingRoutineArgument1, int *FittingRoutineArgument2, int *FittingRoutineArgument3, bool *IncludeResolutionEffects, int *NumberOfSmearingFolds, char ResolutionFileLocation[256], bool *PrintCovarianceMatrix, double *ChiSquareFractile, bool *CMD, int *WriteLog)
+int AssignArguments(int NumberOfArguments, char *Arguments[], char CardFileLocation[256], char SamplesFileLocation[256], char ParameterFileLocation[256], char PDBFileLocation[256], bool *ReadAtomsAsResidues, double *QMin, double *QMax, int *ChooseFittingRoutine, int *FittingRoutineArgument1, int *FittingRoutineArgument2, int *FittingRoutineArgument3, bool *IncludeResolutionEffects, int *NumberOfSmearingFolds, char ResolutionFileLocation[256], bool *PrintCovarianceMatrix, double *ChiSquareFractile, bool *CMD, int *WriteLog)
 {
 	// Declarations
 	char Category ;
@@ -127,6 +127,15 @@ int AssignArguments(int NumberOfArguments, char *Arguments[], char CardFileLocat
 			// .pdb file location
 			case 'd':
 				sprintf(PDBFileLocation, "%s", Argument) ;
+			break ;
+
+			// Read all atoms as one residue in the ImportPDBFile routines and ProteinStructure
+			case 'a':
+				if (atoi(Argument) != 0)
+				{
+					*ReadAtomsAsResidues = true ;
+				}
+
 			break ;
 
 

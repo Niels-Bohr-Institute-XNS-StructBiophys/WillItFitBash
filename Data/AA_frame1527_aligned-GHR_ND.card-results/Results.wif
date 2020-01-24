@@ -7,7 +7,7 @@ Datafiles:
 Sample info-file:
 	/home/msmile/Seafile/LINX/Projects/FP04.01_NovoNordisk/DataAnalysis/WIFBash/Data/GHR_MSP1D1POPC.dat 
 
-Final chisq = 6.59801 
+Final chisq = 6.08664 
 
 Lower limit on q = 0 
 Upper limit on q = 1 
@@ -23,16 +23,16 @@ Parameters:
 	 5   5                 Fixed             WaterAtHeads
 	 6   0                 Fixed             WaterAtBelt
 	 7   0                 Fixed             Dummy
-	 8   5.08315           3.44594           XRoughness
-	 9   1.1               0.248671          CVBelt
-	10   0.928804          0.0173923         CVLipids
-	11   1.09167           0.0980261         CVMP
+	 8   5.09868           3.30428           XRoughness
+	 9   1.1               0.25427           CVBelt
+	10   0.9305            0.0180492         CVLipids
+	11   1.08597           0.0974957         CVMP
 	12   0                 Fixed             BackN100
 	13   1                 Fixed             ScaleN100
 	14   0                 Fixed             BackN0
 	15   1                 Fixed             ScaleN0
 	16   0.00012           Fixed             BackX
-	17   1.19931           1.29862           ScaleX
+	17   1.18977           1.28494           ScaleX
 	18   5                 Fixed             NRoughness
 	19   1                 Fixed             CVWater
 	20   1                 Fixed             ScaleConc
@@ -53,7 +53,7 @@ Atom and residue counts:
 
 	Number of Atoms                    : 13171
 	Number of Atoms (Modification XXX) : 0
-	Number of Residues                 : 13171
+	Number of Residues                 : 846
 
 	Number of H  : 6479
 	Number of D  : 0
@@ -73,16 +73,16 @@ Atom and residue counts:
 
 
 Constraints for spectrum 0: 
-	Scattering length density of headgroups = 1.31822e-13
-	Scattering length density of core       = 8.82308e-14
-	Scattering length density of methyl     = 5.03628e-14
+	Scattering length density of headgroups = 1.31661e-13
+	Scattering length density of core       = 8.807e-14
+	Scattering length density of methyl     = 5.0271e-14
 	Scattering length density of belt       = 1.1131e-13
 	Area per headgroup                      = 65
 
 Global parameteres:
-	Height of bilayer             = 40.5549 
-	Height of hydrophobic bilayer = 26.5038 
-	Height of methyl layer        = 3.02234 
+	Height of bilayer             = 40.6476 
+	Height of hydrophobic bilayer = 26.5522 
+	Height of methyl layer        = 3.03714 
 	Concentration                 = 0 
 	Mol. volume of dry lipid head = 0 
 	Mol. volume of lipid tail     = 0 
@@ -90,9 +90,9 @@ Global parameteres:
 	Mol. volume of belt           = 0 
 
 	Number density       = 5.48002e+14 
-	Major semiaxis       = 42.6979 
-	Minor semiaxis       = 30.4985 
+	Major semiaxis       = 42.6682 
+	Minor semiaxis       = 30.4773 
 	Volume of core       = 0 
 	Volume of headgroups = 0 
-	Width of belt        = 8.95839 
+	Width of belt        = 8.9634 
 	Volume of methyl     = 0 

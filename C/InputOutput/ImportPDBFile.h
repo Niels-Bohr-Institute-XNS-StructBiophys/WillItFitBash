@@ -92,7 +92,8 @@ void GetBaseFileNameFromPath(char *str, char *new_str, int WriteLog, FILE* logfi
 
 
 
-int CheckNumberOfResiduesInPDBFile(char Filename[256])
+
+int CheckNumberOfResiduesInPDBFile(char Filename[256], bool ReadAtomsAsResidues)
 {
 	// Declarations
 	FILE *PointerToPDBFile ;
@@ -101,6 +102,10 @@ int CheckNumberOfResiduesInPDBFile(char Filename[256])
 	int NumberOfResidues = 0 ;
 	int PreviousResidueID = 0 ;
 	int ResidueID = 0 ;
+
+	int len, offset ;
+	if ( ReadAtomsAsResidues ) { offset = 6 ; len = 5 ; } // atom ID (pos 7-11)
+	else { offset = 22 ; len = 4 ; } // residue ID (pos 23-26)
 
 	// I/O
 	PointerToPDBFile = fopen( Filename, "r") ;
@@ -112,20 +117,24 @@ int CheckNumberOfResiduesInPDBFile(char Filename[256])
 		// extract lines starting with ATOM or HETATM pattern
 		if ( strncmp( Linebuffer, "ATOM", 4) == 0 || strncmp( Linebuffer, "HETATM", 6) == 0 )
 		{
-			memcpy( dummy, Linebuffer + 6, 5 * sizeof Linebuffer[0]) ; // here read atom ID (pos 7-11) instead of residue ID (pos 23-26)
-			dummy[5] = 0 ;
+			memcpy( dummy, Linebuffer + offset, len * sizeof Linebuffer[0]) ; // here read residue ID (pos 23-26) or atom ID (pos 7-11)
+			dummy[len] = 0 ;
 			delallspc( dummy ) ;
 			ResidueID = strtol( dummy, NULL, 10) ;
 
 			// count ResidueIDs
 			if( ResidueID != PreviousResidueID && ResidueID != 0)
 			{
-				memcpy( dummy, Linebuffer + 16, 1 * sizeof Linebuffer[0]) ; // read altLoc from pos 17
-				dummy[1] = 0 ;
-				// in case of multiple occupancies (alternative locations) count only once
-				if ( strcmp( " ", dummy) == 0 || strcmp( "A", dummy) == 0) { ++NumberOfResidues; }
+				if ( ReadAtomsAsResidues)
+				{
+					// consider altLoc in case of all-atom based mode
+					memcpy( dummy, Linebuffer + 16, 1 * sizeof Linebuffer[0]) ; // read altLoc from pos 17
+					dummy[1] = 0 ;
+					// in case of multiple occupancies (alternative locations) count only once
+					if ( strcmp( " ", dummy) == 0 || strcmp( "A", dummy) == 0) { ++NumberOfResidues ; }
+				}
+				else { ++NumberOfResidues ; }
 			}
-
 			PreviousResidueID = ResidueID;
 		}
 	}
@@ -134,6 +143,52 @@ int CheckNumberOfResiduesInPDBFile(char Filename[256])
 
 	return NumberOfResidues;
 }
+
+
+// old atom based counting
+//int CheckNumberOfResiduesInPDBFile(char Filename[256])
+//{
+//	// Declarations
+//	FILE *PointerToPDBFile ;
+//	char Linebuffer[82] ; // length of PDB file incl newline (\n) and terminating NULL (\0)
+//	char dummy[82] ; // dummy char array
+//	int NumberOfResidues = 0 ;
+//	int PreviousResidueID = 0 ;
+//	int ResidueID = 0 ;
+//
+//	// I/O
+//	PointerToPDBFile = fopen( Filename, "r") ;
+//
+//	if( PointerToPDBFile == 0) { return -1 ; }
+//
+//	while( fgets( Linebuffer, sizeof(Linebuffer), PointerToPDBFile) != NULL )
+//	{
+//		// extract lines starting with ATOM or HETATM pattern
+//		if ( strncmp( Linebuffer, "ATOM", 4) == 0 || strncmp( Linebuffer, "HETATM", 6) == 0 )
+//		{
+//			memcpy( dummy, Linebuffer + 6, 5 * sizeof Linebuffer[0]) ; // here read atom ID (pos 7-11) instead of residue ID (pos 23-26)
+//			dummy[5] = 0 ;
+//			delallspc( dummy ) ;
+//			ResidueID = strtol( dummy, NULL, 10) ;
+//
+//			// count ResidueIDs
+//			if( ResidueID != PreviousResidueID && ResidueID != 0)
+//			{
+//				memcpy( dummy, Linebuffer + 16, 1 * sizeof Linebuffer[0]) ; // read altLoc from pos 17
+//				dummy[1] = 0 ;
+//				// in case of multiple occupancies (alternative locations) count only once
+//				if ( strcmp( " ", dummy) == 0 || strcmp( "A", dummy) == 0) { ++NumberOfResidues; }
+//			}
+//
+//			PreviousResidueID = ResidueID;
+//		}
+//	}
+//
+//	fclose(PointerToPDBFile) ;
+//
+//	return NumberOfResidues;
+//}
+
 
 
 
@@ -657,6 +712,11 @@ void AssignAtom( char AtomName[3], struct Protein * ProteinStructure, int Curren
 // .Weight
 //
 // The number of each atom type will be counted, too
+//
+// TODO
+// add entries:
+// -int ResidueID ;
+// -char ResidueName[4] ;
 void ImportAtomsFromPDBFile(char Filename[256], struct Protein * ProteinStructure, int WriteLog, FILE *logfile)
 {
 	// Declarations
@@ -702,7 +762,6 @@ void ImportAtomsFromPDBFile(char Filename[256], struct Protein * ProteinStructur
 //				AssignAtom( AtomName, &ProteinStructure->Atoms[CurrentAtomID].XRayScatteringLength, &ProteinStructure->Atoms[CurrentAtomID].NeutronScatteringLength, &ProteinStructure->Atoms[CurrentAtomID].Volume, &ProteinStructure->Atoms[CurrentAtomID].Weight, WriteLog, logfile) ;
 				AssignAtom( AtomName, ProteinStructure, CurrentAtomID, WriteLog, logfile) ;
 
-
 				++CurrentAtomID ;
 			}
 		}
@@ -717,7 +776,7 @@ void CenterPDB( struct Protein * ProteinStructure, int WriteLog, FILE* logfile)
 {
 	// Function for finding the geometric center of PDB Structure and translating it so that the center becomes (0,0,0)
 	// Find geometric center for protein structure
-	//
+	// Does not matter if calculated on an atom or residue based level, since average is linear operation
 
 	double xDum = 0.0 ;
 	double yDum = 0.0 ;
@@ -767,7 +826,9 @@ void CenterPDB( struct Protein * ProteinStructure, int WriteLog, FILE* logfile)
 
 // Fill fields from struct ProteinStructure->Residues[] for each residue in PDB, calculate from all ATOM / HETATM entries belonging to a residue
 // ProteinStructure has been allocated priorly in function AllocateProteinStructure(...) ../Auxillary/Allocation.h
-void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStructure, char *ResultsDirectory, int WriteLog, FILE* logfile)
+
+// can handle old WIF residue-based and new all-atom (each atom is a residue) implementation  
+void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStructure, bool ReadAtomsAsResidues, char *ResultsDirectory, int WriteLog, FILE* logfile)
 {
 	// Declarations
 	FILE *PointerToPDBFile ;
@@ -807,13 +868,18 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 	double yCenterOfVolume = 0.0 ;
 	double zCenterOfVolume = 0.0 ;
 
-	struct Protein DummyProteinStructure ; // DummyProteinStructure used for AssignAtom
+	struct Protein DummyProteinStructure ; // DummyProteinStructure used for AssignAtom, thus assign 1 Atom, 0 residues
 	DummyProteinStructure.NumberOfAtoms = 1 ;
 	DummyProteinStructure.NumberOfResidues = 0 ;
 	AllocateProteinStructure( &DummyProteinStructure, DummyProteinStructure.NumberOfResidues, DummyProteinStructure.NumberOfAtoms) ;
 
 
+
 	int NumberOfModificationAtoms = 0 ;
+
+	int len, offset ;
+	if ( ReadAtomsAsResidues ) { offset = 6 ; len = 5 ; } // atom ID (pos 7-11)
+	else { offset = 22 ; len = 4 ; } // residue ID (pos 23-26)
 
 
 	// I/O
@@ -849,8 +915,8 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 			// current line processing to read current ResidueID, altLoc, coordinates, atom name
 
 			// extract Residue ID from line
-			memcpy( dummy, Linebuffer + 6, 5 * sizeof Linebuffer[0]) ; // here read atom ID (pos 7-11) instead of residue ID (pos 23-26)
-			dummy[5] = 0 ;
+			memcpy( dummy, Linebuffer + offset, len * sizeof Linebuffer[0]) ; // here read residue ID (pos 23-26) or atom ID (pos 7-11)
+			dummy[len] = 0 ;
 			delallspc( dummy ) ;
 			ResidueID = strtol( dummy, NULL, 10) ;
 
@@ -887,11 +953,16 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 			CurrentAtomName[2] = 0 ;
 			// printf( "'%s'\n", CurrentAtomName) ; // fflush( NULL) ;
 
-			// in case Residue ID is different from previous one, calculate residue level stuff (ProteinStructure->Residues[IndexResidueID].*) for previous residue
-			// exception is if first Residue ID is read, which differs PreviousResidueID (0)
-			// after that "local" residue variables are reset to 0.0 and IndexResidueID is incremented for the new residue, and PreviousResidueID is reset
+			// in case Residue ID is different from previous one, assign residue level stuff (ProteinStructure->Residues[IndexResidueID].*) for previous residue to ProteinStructure->Residues[IndexResidueID].*
+			// skip this for exceptional case when first Residue ID is read, which differs PreviousResidueID(0)
+			// after assigning, "local" residue variables are reset to 0.0 and IndexResidueID is incremented for the new residue, and PreviousResidueID is reset
 			if ( ResidueID != PreviousResidueID ) {
 				if (PreviousResidueID != 0) {
+
+					// ProteinStructure->Residues[].AtomName[3] and AtomName[3] -> okay for strcpy with incl terminating NULL
+					// assign AtomName to Residue when reading each atom as a single residue, otherwise '--'
+					if ( ReadAtomsAsResidues ) { strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, AtomName) ; }
+					else { strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, "--") ; }
 
 					ProteinStructure->Residues[IndexResidueID].Volume = VolumeOfResidue ;
 					ProteinStructure->Residues[IndexResidueID].Weight = WeightOfResidue ;
@@ -911,24 +982,24 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 					ProteinStructure->Residues[IndexResidueID].yNeutronScattering = yCenterOfNeutronScattering / NeutronScatteringLengthOfResidue ;
 					ProteinStructure->Residues[IndexResidueID].zNeutronScattering = zCenterOfNeutronScattering / NeutronScatteringLengthOfResidue ;
 
-					// ProteinStructure->Residues[].AtomName[3] and AtomName[3] -> okay for strcpy with incl terminating NULL
-					strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, AtomName) ;
+					// reset
+					VolumeOfResidue = 0.0 ;
+					WeightOfResidue = 0.0 ;
+
+					XRayScatteringLengthOfResidue = 0.0 ;
+					NeutronScatteringLengthOfResidue = 0.0 ;
 
 					xCenterOfVolume = 0.0 ;
 					yCenterOfVolume = 0.0 ;
 					zCenterOfVolume = 0.0 ;
-					VolumeOfResidue = 0.0 ;
-					WeightOfResidue = 0.0 ;
 
 					xCenterOfXRayScattering = 0.0 ;
 					yCenterOfXRayScattering = 0.0 ;
 					zCenterOfXRayScattering = 0.0 ;
-					XRayScatteringLengthOfResidue = 0.0 ;
 
 					xCenterOfNeutronScattering = 0.0 ;
 					yCenterOfNeutronScattering = 0.0 ;
 					zCenterOfNeutronScattering = 0.0 ;
-					NeutronScatteringLengthOfResidue = 0.0 ;
 
 					++IndexResidueID ;
 				}
@@ -938,22 +1009,20 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 				memcpy( ProteinStructure->Residues[IndexResidueID].Name, Linebuffer + 17, 3 * sizeof Linebuffer[0]) ; // keep spaces (pos 18-20)
 				ProteinStructure->Residues[IndexResidueID].Name[3] = 0 ;
 
-				// printf("'%s' ", ProteinStructure->Residues[IndexResidueID].Name) ; fflush( NULL) ;
-
-
 				// does residue name match modification name? if yes rename current residue name to "  X"
 				if ( strcmp( ProteinStructure->Residues[IndexResidueID].Name, ProteinStructure->ModificationName) == 0 )
 				{
 					strcpy( ProteinStructure->Residues[IndexResidueID].Name, "  X") ;
 				}
 
-				// printf("'%s' ", ProteinStructure->Residues[IndexResidueID].Name) ; fflush( NULL) ;
-
+				// update PreviousResidueID
 				PreviousResidueID = ResidueID ;
 			}
 
 
 			// further processing of information from current line
+
+
 
 			// BEGIN SECTION
 
@@ -971,32 +1040,45 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 			// END SECTION
 
 
-			// printf("'%s'\n", CurrentAtomName) ; // fflush( NULL) ;
-			strcpy(AtomName, CurrentAtomName);
-			// printf("'%s'\n", AtomName) ; // fflush( NULL) ;
 
-			VolumeOfResidue = DummyProteinStructure.Atoms[0].Volume ;
-			WeightOfResidue = DummyProteinStructure.Atoms[0].Weight ;
-			XRayScatteringLengthOfResidue = DummyProteinStructure.Atoms[0].XRayScatteringLength ;
-			NeutronScatteringLengthOfResidue = DummyProteinStructure.Atoms[0].NeutronScatteringLength ;
+			strcpy( AtomName, CurrentAtomName) ;
 
-			xCenterOfVolume = DummyProteinStructure.Atoms[0].Volume * xDummy ;
-			yCenterOfVolume = DummyProteinStructure.Atoms[0].Volume * yDummy ;
-			zCenterOfVolume = DummyProteinStructure.Atoms[0].Volume * zDummy ;
+			// switched back to += instead of = for residue == atoms case
+			VolumeOfResidue += DummyProteinStructure.Atoms[0].Volume ;
+			WeightOfResidue += DummyProteinStructure.Atoms[0].Weight ;
 
-			xCenterOfXRayScattering = DummyProteinStructure.Atoms[0].XRayScatteringLength * xDummy ;
-			yCenterOfXRayScattering = DummyProteinStructure.Atoms[0].XRayScatteringLength * yDummy ;
-			zCenterOfXRayScattering = DummyProteinStructure.Atoms[0].XRayScatteringLength * zDummy ;
+			XRayScatteringLengthOfResidue += DummyProteinStructure.Atoms[0].XRayScatteringLength ;
+			NeutronScatteringLengthOfResidue += DummyProteinStructure.Atoms[0].NeutronScatteringLength ;
 
-			xCenterOfNeutronScattering = DummyProteinStructure.Atoms[0].NeutronScatteringLength * xDummy ;
-			yCenterOfNeutronScattering = DummyProteinStructure.Atoms[0].NeutronScatteringLength * yDummy ;
-			zCenterOfNeutronScattering = DummyProteinStructure.Atoms[0].NeutronScatteringLength * zDummy ;
+			xCenterOfVolume += DummyProteinStructure.Atoms[0].Volume * xDummy ;
+			yCenterOfVolume += DummyProteinStructure.Atoms[0].Volume * yDummy ;
+			zCenterOfVolume += DummyProteinStructure.Atoms[0].Volume * zDummy ;
+
+			xCenterOfXRayScattering += DummyProteinStructure.Atoms[0].XRayScatteringLength * xDummy ;
+			yCenterOfXRayScattering += DummyProteinStructure.Atoms[0].XRayScatteringLength * yDummy ;
+			zCenterOfXRayScattering += DummyProteinStructure.Atoms[0].XRayScatteringLength * zDummy ;
+
+			xCenterOfNeutronScattering += DummyProteinStructure.Atoms[0].NeutronScatteringLength * xDummy ;
+			yCenterOfNeutronScattering += DummyProteinStructure.Atoms[0].NeutronScatteringLength * yDummy ;
+			zCenterOfNeutronScattering += DummyProteinStructure.Atoms[0].NeutronScatteringLength * zDummy ;
 
 
-			// in case the last residue is processed the information for ProteinStructure->Residues[IndexResidueID].* must be updated for each read (het)atom
+			// in exceptional case when the last residue is processed, the information for ProteinStructure->Residues[IndexResidueID].* must be updated for each read (HET)ATOM
 			// compared to Nicholas WIF code, this section has been moved here, since the information of the local variables (VolumeOfResidue, ...) must be known
+			// why the hell, we put this so complicated here and not completely out of the loop as it was in the original WIF code?
 			if ( IndexResidueID == ProteinStructure->NumberOfResidues - 1 )
 			{
+
+				// ProteinStructure->Residues[]
+				//	.Name[4]
+				//	.ModificationName[4]
+				//	.AtomName[3]
+				// ProteinStructure->Residues[].AtomName[3] and AtomName[3] -> okay for strcpy with incl terminating NULL
+
+				// assign AtomName to Residue when reading each atom as a single residue, otherwise '--'
+				if ( ReadAtomsAsResidues ) { strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, AtomName) ; }
+				else { strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, "--") ; }
+
 				ProteinStructure->Residues[IndexResidueID].Volume = VolumeOfResidue ;
 				ProteinStructure->Residues[IndexResidueID].Weight = WeightOfResidue ;
 
@@ -1014,13 +1096,6 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 				ProteinStructure->Residues[IndexResidueID].xNeutronScattering = xCenterOfNeutronScattering / NeutronScatteringLengthOfResidue ;
 				ProteinStructure->Residues[IndexResidueID].yNeutronScattering = yCenterOfNeutronScattering / NeutronScatteringLengthOfResidue ;
 				ProteinStructure->Residues[IndexResidueID].zNeutronScattering = zCenterOfNeutronScattering / NeutronScatteringLengthOfResidue ;
-
-				// ProteinStructure->Residues[]
-				//	.Name[4]
-				//	.ModificationName[4]
-				//	.AtomName[3]
-				// ProteinStructure->Residues[].AtomName[3] and AtomName[3] -> okay for strcpy with incl terminating NULL
-				strcpy( ProteinStructure->Residues[IndexResidueID].AtomName, AtomName) ;
 			}
 		}
 		else
@@ -1039,10 +1114,9 @@ void ImportResiduesFromPDBFile( char Filename[256], struct Protein * ProteinStru
 	free(DummyProteinStructure.Residues) ;
 	free(DummyProteinStructure.Atoms) ;
 
-
-
 	fclose( PointerToSkippedLinesPDBFile ) ;
 	fclose( PointerToPDBFile ) ;
 
+	// Center ProteinStructure, note that this operation works independent of the chosen mode (all-atom-based or residue-based), since residue average is also a linear operation
 	CenterPDB( ProteinStructure, WriteLog, logfile ) ;
 }
