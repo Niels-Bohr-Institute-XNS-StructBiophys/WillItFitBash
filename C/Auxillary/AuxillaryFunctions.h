@@ -129,7 +129,7 @@ int AssignArguments(int NumberOfArguments, char *Arguments[], char CardFileLocat
 				sprintf(PDBFileLocation, "%s", Argument) ;
 			break ;
 
-			// Read all atoms as one residue in the ImportPDBFile routines and ProteinStructure
+			// Read all atoms as one single residue in the ImportPDBFile routines and ProteinStructure with -a!=0, -a=0 or the default case without providing this option will be residue-based as in original WIF
 			case 'a':
 				if (atoi(Argument) != 0)
 				{

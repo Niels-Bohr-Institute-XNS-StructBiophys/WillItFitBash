@@ -62,7 +62,7 @@ PrintCovarianceMatrix = 1 # boolean flag 0 or 1
 ChiSquareFractile = 0.0
 
 CMD = 1 # do not change
-ReadAtomsAsResidues = 0 # =0 for residue-based reading of PDB and calculations, !=0 for all-atom-based (each atom is treated as a single residue)
+ReadAtomsAsResidues = 1 # =0 for residue-based reading of PDB and calculations, !=0 for all-atom-based (each atom is treated as a single residue)
 
 # logging / reporting
 #

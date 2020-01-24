@@ -106,12 +106,12 @@ int main(int argc, char *argv[])
 	/// Declarations
 
 	// Variables describing the spectras
-	struct Dataset * Data;
+	struct Dataset * Data ;
 	char CardFileLocation[256] ;
 
-	int NumberOfSpectra;
-	int HighestNumberOfDatapoints;
-	int TotalNumberOfDatapoints = 0;
+	int NumberOfSpectra ;
+	int HighestNumberOfDatapoints ;
+	int TotalNumberOfDatapoints = 0 ;
 
 	// Variables describing the sample info
 	char SamplesFileLocation[256] ;
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 	char ResultsDirectory[256] ;
 	char LogFileLocation[256] ;
 
-	double *VolumesOfMolecules;
+	double *VolumesOfMolecules ;
 	char ModificationName[4] ;
 
 	char PDBFileLocation[256] ;
@@ -129,31 +129,31 @@ int main(int argc, char *argv[])
 	bool ReadAtomsAsResidues = false ;
 
 	// Variables describing the parameters
-	struct Parameter * Parameters;
+	struct Parameter * Parameters ;
 	char ParameterFileLocation[256] ;
 	int NumberOfParameters = 0;
 	int NumberOfFreeParameters = 0;
 
 	// Variables describing the properties of the fit
-	double QMin = 0.0;
-	double QMax = 1.0;
-	double DeltaForDifferentiations = 0.001;
-	double ChiSquare;
-	double ChiSquareFractile;
+	double QMin = 0.0 ;
+	double QMax = 1.0 ;
+	double DeltaForDifferentiations = 0.001 ;
+	double ChiSquare ;
+	double ChiSquareFractile ;
 
-	int ChooseFittingRoutine = 0;
-	int FittingRoutineArgument1 = 50;
-	int FittingRoutineArgument2 = 10;
-	int FittingRoutineArgument3 = 32;
-	int FittingRoutineError = -1;
+	int ChooseFittingRoutine = 0 ;
+	int FittingRoutineArgument1 = 50 ;
+	int FittingRoutineArgument2 = 10 ;
+	int FittingRoutineArgument3 = 32 ;
+	int FittingRoutineError = -1 ;
 
-	bool PrintCovarianceMatrix = false;
+	bool PrintCovarianceMatrix = false ;
 	char Message[256] ;
 
 	// Variables describing the resolution
 	char ResolutionFileLocation[256] ;
-	int NumberOfSmearingFolds = 0;
-	bool IncludeResolutionEffects = false;
+	int NumberOfSmearingFolds = 0 ;
+	bool IncludeResolutionEffects = false ;
 
 	// CMD mode or py
 	bool CMD = true ;
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 	// how to write a log(file), by default write most important output to stdout (terminal)
 	int WriteLog = -1 ;
 	FILE *logfile ;
-	int LOWER_MAX_INDEX = 0 ; 
+	int LOWER_MAX_INDEX = 0 ;
 	int UPPER_MIN_INDEX = 0 ;
 
 	/// Obtain arguments from program or request them in console
