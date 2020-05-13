@@ -1,0 +1,32 @@
+5              Sample information for nanodiscs. The values corresponds to POPC and protein csMSP1D1 and GHR ICD.
+
+The molecular volumes
+30.0            Molecular volume of solvent
+331.0           Molecular volume of a lipid headgroup
+818.8           Molecular volume of lipid CH2-groups
+108.6           Molecular volume of lipid CH3-groups
+27115.0         Molecular volume of a belt protein
+
+The neutron scattering lengths in 100% D2O
+1.9145E-12      Scattering length of solvent
+7.05E-12        Scattering length of a lipid headgroup
+-1.67E-12       Scattering length of lipid CH2-groups
+-9.15E-13       Scattering length of lipid CH3-groups
+8.27E-10        Scattering length of a belt protein 50pctExch
+
+The neutron scattering lengths in 100% H2O
+-1.678E-13      Scattering length of solvent
+7.05E-12        Scattering length of a lipid headgroup
+-1.67E-12       Scattering length of lipid CH2-groups
+-9.15E-13       Scattering length of lipid CH3-group
+6.49E-10        Scattering length of a belt protein
+
+The X-ray scattering lengths
+2.82E-12        Scattering length of solvent
+4.62E-11        Scattering length of a lipid headgroup
+6.71E-11        Scattering length of lipid CH2-groups
+5.08E-12        Scattering length of lipid CH3-groups
+3.32E-9         Scattering length of one belt protein
+
+Name Of Modification
+XXX
